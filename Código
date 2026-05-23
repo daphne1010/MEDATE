@@ -1,0 +1,65 @@
+import processing.serial.*;
+Serial puerto;
+
+float velKmh1 = 0;
+float velKmh2 = 0;
+float posX1 = 100;
+float posX2 = 100;
+float angulo1 = 0;
+float angulo2 = 0;
+float META_X;
+boolean corriendo = true;
+int ganador = 0;
+float ESCALA = 2.0;
+
+color colorBici1 = color(30, 144, 255);
+color colorBici2 = color(220, 60, 60);
+color colorMeta  = color(255, 220, 0);
+
+void setup() {
+  size(900, 500);
+  META_X = width - 120;
+  frameRate(60);
+  puerto = new Serial(this, "COM3", 9600);
+  puerto.bufferUntil('\n');
+}
+
+void draw() {
+  background(30, 60, 120);
+  noStroke(); fill(34, 100, 34);
+  rect(0, height*0.55, width, height);
+  fill(50);
+  rect(0, height*0.38, width, height*0.35);
+  stroke(255,255,255,80); strokeWeight(2);
+  for (int x=0; x<width; x+=60)
+    line(x, height*0.555, x+30, height*0.555);
+
+  stroke(255); strokeWeight(3);
+  line(100, height*0.38, 100, height*0.73);
+  noStroke(); fill(255); textSize(13); textAlign(CENTER);
+  text("SALIDA", 100, height*0.355);
+  dibujarMeta();
+
+  if (corriendo) {
+    float dt = 1.0/60.0;
+    posX1 += (velKmh1/3.6) * ESCALA * dt;
+    posX2 += (velKmh2/3.6) * ESCALA * dt;
+    angulo1 += (velKmh1/3.6)/0.33*dt;
+    angulo2 += (velKmh2/3.6)/0.33*dt;
+    if (posX1>=META_X || posX2>=META_X) {
+      if (ganador==0) {
+        if (posX1>=META_X && posX2>=META_X) ganador=3;
+        else if (posX1>=META_X) ganador=1;
+        else ganador=2;
+        corriendo=false;
+      }
+    }
+    posX1 = constrain(posX1, 100, META_X);
+    posX2 = constrain(posX2, 100, META_X);
+  }
+
+  dibujarBici(posX1, height*0.48, colorBici1, angulo1, 1);
+  dibujarBici(posX2, height*0.63, colorBici2, angulo2, 2);
+  dibujarPanel();
+  if (!corriendo) dibujarGanador();
+}
