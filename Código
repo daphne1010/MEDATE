@@ -1,63 +1,67 @@
 import processing.serial.*;
-Serial puerto;
-
+// contribucion de Melanie Zabalaga para la practica de github
+Serial puerto; // objeto encargado de la comunicacion serial con arduino
+// velocidad actual en km/m
 float velKmh1 = 0;
 float velKmh2 = 0;
+// posicion de inicio de ambas bicicletas
 float posX1 = 100;
 float posX2 = 100;
+
 float angulo1 = 0;
 float angulo2 = 0;
 float META_X;
-boolean corriendo = true;
+boolean corriendo = true; // controla si sigue la carrera
 int ganador = 0;
 float ESCALA = 2.0;
-
+ // color para diferenciar a los participantes y  color de la meta
 color colorBici1 = color(30, 144, 255);
 color colorBici2 = color(220, 60, 60);
 color colorMeta  = color(255, 220, 0);
 
 void setup() {
   size(900, 500);
-  META_X = width - 120;
+  META_X = width - 120; // define la ubicacion de la meta
   frameRate(60);
   puerto = new Serial(this, "COM3", 9600);
-  puerto.bufferUntil('\n');
+  puerto.bufferUntil('\n'); // procesa los datos que recibio del arduino linea por linea
 }
 
-void draw() {
-  background(30, 60, 120);
+void draw() { // actualiza la animacion de la carrera
+  background(30, 60, 120); // dibuja el fondo y carretera 
   noStroke(); fill(34, 100, 34);
   rect(0, height*0.55, width, height);
   fill(50);
-  rect(0, height*0.38, width, height*0.35);
+  rect(0, height*0.38, width, height*0.35); 
   stroke(255,255,255,80); strokeWeight(2);
   for (int x=0; x<width; x+=60)
     line(x, height*0.555, x+30, height*0.555);
 
   stroke(255); strokeWeight(3);
-  line(100, height*0.38, 100, height*0.73);
+  line(100, height*0.38, 100, height*0.73); // dibuja la linea de salida de la carrera
   noStroke(); fill(255); textSize(13); textAlign(CENTER);
   text("SALIDA", 100, height*0.355);
-  dibujarMeta();
+  dibujarMeta(); // dibuja la meta que deben alcanzar los 2 competidores
 
-  if (corriendo) {
+  if (corriendo) { // verifica si la carrera sigue continuando
     float dt = 1.0/60.0;
-    posX1 += (velKmh1/3.6) * ESCALA * dt;
-    posX2 += (velKmh2/3.6) * ESCALA * dt;
-    angulo1 += (velKmh1/3.6)/0.33*dt;
-    angulo2 += (velKmh2/3.6)/0.33*dt;
-    if (posX1>=META_X || posX2>=META_X) {
-      if (ganador==0) {
+    posX1 += (velKmh1/3.6) * ESCALA * dt; // actualiza la posicion de la bicicleta 1
+    posX2 += (velKmh2/3.6) * ESCALA * dt; // actualiza posicion de bicicleta 2
+    angulo1 += (velKmh1/3.6)/0.33*dt; // actualiza rotacion de las ruedas de la bicicleta 1
+    angulo2 += (velKmh2/3.6)/0.33*dt; // actualiza rotacion de las ruedas de bicicleta 2
+    if (posX1>=META_X || posX2>=META_X) { // comprueba si ya llego alguna bicileta a la meta
+      if (ganador==0) { // determina el ganador segun quien llego primero a la meta
         if (posX1>=META_X && posX2>=META_X) ganador=3;
         else if (posX1>=META_X) ganador=1;
         else ganador=2;
         corriendo=false;
       }
     }
+    // hace que las bicicletas no pasen la meta una vez lleguen
     posX1 = constrain(posX1, 100, META_X);
     posX2 = constrain(posX2, 100, META_X);
   }
-
+  // dibuja ambas biciletas 
   dibujarBici(posX1, height*0.48, colorBici1, angulo1, 1);
   dibujarBici(posX2, height*0.63, colorBici2, angulo2, 2);
   dibujarPanel();
