@@ -1,0 +1,13 @@
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\bin\Debug\DesafioBicis.exe.config
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\bin\Debug\DesafioBicis.exe
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\bin\Debug\DesafioBicis.pdb
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.csproj.AssemblyReference.cache
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.FrmMenu.resources
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.FrmRegistro.resources
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.FrmCarrera.resources
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.FrmHistorial.resources
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.Properties.Resources.resources
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.csproj.GenerateResource.cache
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.csproj.CoreCompileInputs.cache
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.exe
+C:\Personal\Unifranz\Progra I\c#\DesafioBicis\DesafioBicis\obj\Debug\DesafioBicis.pdb
